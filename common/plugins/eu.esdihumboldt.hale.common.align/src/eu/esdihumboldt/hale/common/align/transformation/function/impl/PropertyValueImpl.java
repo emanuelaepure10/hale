@@ -23,6 +23,7 @@ import eu.esdihumboldt.hale.common.align.model.impl.PropertyEntityDefinition;
 import eu.esdihumboldt.hale.common.align.transformation.function.PropertyValue;
 import eu.esdihumboldt.hale.common.convert.ConversionServiceNotAvailableException;
 import eu.esdihumboldt.hale.common.core.HalePlatform;
+import eu.esdihumboldt.hale.common.instance.model.impl.InstanceDecorator;
 
 /**
  * Default {@link PropertyValue} implementation.
@@ -67,6 +68,10 @@ public class PropertyValueImpl implements PropertyValue {
 
 		if (type.isAssignableFrom(value.getClass())) {
 			return (T) value;
+		}
+
+		if (value instanceof InstanceDecorator) {
+			return (T) ((InstanceDecorator) value).getValue();
 		}
 
 		ConversionService cs = HalePlatform.getService(ConversionService.class);
