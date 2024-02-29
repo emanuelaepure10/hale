@@ -73,10 +73,10 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="eu.esdihumboldt.hale.ui.application"
-            name="hale»studio">
+            name="hale studio">
          <property
                name="appName"
-               value="hale»studio">
+               value="hale studio">
          </property>
          <property
                name="windowImages"

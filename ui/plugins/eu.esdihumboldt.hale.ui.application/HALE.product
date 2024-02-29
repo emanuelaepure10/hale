@@ -108,6 +108,7 @@ https://www.wetransform.to/services/support/
       <feature id="org.eclipse.ecf.filetransfer.httpclient45.feature"/>
       <feature id="eu.esdihumboldt.hale.platform.deegree" installMode="root"/>
       <feature id="de.fhg.igd.mapviewer.feature.core" installMode="root"/>
+      <feature id="eu.esdihumboldt.hale.io.feature.unsafe" installMode="root"/>
    </features>
 
    <configurations>
