@@ -1,0 +1,48 @@
+name: 'Scan CI Pipeline (w/ Trivy Config)'
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Maven
+        uses: s4u/setup-maven-action@v1.5.1
+        with:
+          java-version: 17
+          java-distribution: temurin
+          maven-version: 3.8.6
+
+      - name: Debug directory contents
+        run: ls -la
+          
+      - name: Run Trivy vulnerability scanner in fs mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          # trivy-config: trivy.yaml
+        #run: cat /path/to/trivy-output.log  
+
+      # Upload Trivy scan results to GitHub Security tab
+      #- name: Upload Trivy scan results to GitHub Security tab
+      #  uses: github/codeql-action/upload-sarif@v2
+      #  with:
+      #    sarif_file: 'trivy-scan-results.sarif'  
+          
+      - name: Upload Trivy scan results
+        uses: actions/upload-artifact@v2
+        with:
+          name: trivy-results
+          path: trivy-results.json
+
+      - name: Display Trivy results
+        run: cat trivy-results.json
+        if: success() && always()    
