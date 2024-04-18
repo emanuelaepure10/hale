@@ -1,0 +1,73 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Trivy",
+          "version": "0.12.0",
+          "informationUri": "https://github.com/aquasecurity/trivy",
+          "rules": [
+            {
+              "id": "TRIVY_SCAN_RESULT",
+              "name": "Trivy Vulnerability Scan Result",
+              "shortDescription": {
+                "text": "Trivy scan result for vulnerabilities"
+              },
+              "fullDescription": {
+                "text": "Trivy scan result for vulnerabilities found in the scanned image."
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "TRIVY_SCAN_RESULT",
+          "level": "error",
+          "message": {
+            "text": "High severity vulnerability found in package XYZ"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///path/to/scanned/image"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "CVE": "CVE-2021-1234",
+            "package": "XYZ",
+            "version": "1.2.3",
+            "severity": "High"
+          }
+        },
+        {
+          "ruleId": "TRIVY_SCAN_RESULT",
+          "level": "warning",
+          "message": {
+            "text": "Medium severity vulnerability found in package ABC"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///path/to/scanned/image"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "CVE": "CVE-2021-5678",
+            "package": "ABC",
+            "version": "4.5.6",
+            "severity": "Medium"
+          }
+        }
+      ]
+    }
+  ]
+}
